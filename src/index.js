@@ -7,7 +7,13 @@
  * @returns {number} new winner rating
  */
 function calculateNewRate(winnerRating, loserRating) {
-    if (typeof winnerRating !== 'number' || typeof loserRating !== 'number' || winnerRating < 0 || loserRating < 0) {
+    if (typeof winnerRating !== 'number' || typeof loserRating !== 'number' || Number.isNaN(winnerRating) || Number.isNaN(loserRating)) {
+        console.log('Invalid input, please valid provide numbers');
+        return NaN;
+    }
+
+    if (winnerRating < 0 || loserRating < 0) {
+        console.log('Invalid input, ratings must be a positive numbers');
         return NaN;
     }
 
@@ -25,11 +31,19 @@ function calculateNewRate(winnerRating, loserRating) {
         newRating = winnerRating;
     }
 
+    console.log(`Winner ${winnerRating}, Loser ${loserRating} = New Rating ${newRating}`);
     return parseFloat(newRating.toFixed(1));
 }
 
-console.log(calculateNewRate(0, 30)); // 30.0 (=30)
-console.log(calculateNewRate(60, 100)); // 75.0 (+15)
-console.log(calculateNewRate(33, 32)); // 35.0 (+2)
-console.log(calculateNewRate(33, 30)); // 34.0 (+1)
-console.log(calculateNewRate(33, 10)); // 33.0 (+0)
+calculateNewRate(0, 30); // 30.0 (=30)
+calculateNewRate(60, 100); // 75.0 (+15)
+calculateNewRate(33, 32); // 35.0 (+2)
+calculateNewRate(33, 30); // 34.0 (+1)
+calculateNewRate(33, 10); // 33.0 (+0)
+
+calculateNewRate(NaN, 10); // NaN
+calculateNewRate(NaN, 10); // NaN
+calculateNewRate(-10, 0); // NaN
+calculateNewRate(0, -10); // NaN
+calculateNewRate('abc', 5); // NaN
+calculateNewRate('55', '25'); // NaN
