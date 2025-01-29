@@ -17,14 +17,23 @@ function calculateNewRate(winnerRating, loserRating) {
         return NaN;
     }
 
-    let newRating = 
-        winnerRating === 0 ? loserRating :
-        winnerRating < loserRating ? (winnerRating + (loserRating - winnerRating + 5) / 3) :
-        winnerRating >= loserRating && winnerRating <= loserRating + 2 ? (winnerRating + 2) :
-        winnerRating > loserRating + 2 && winnerRating < loserRating + 20 ? (winnerRating + 1) :
-        winnerRating >= loserRating + 20 ? winnerRating : NaN;
+    if (winnerRating === 0) {
+        return +loserRating.toFixed(1);
+    }
+    if (winnerRating < loserRating) {
+        return +(winnerRating + (loserRating - winnerRating + 5) / 3).toFixed(1);
+    }
+    if (winnerRating >= loserRating && winnerRating <= loserRating + 2) {
+        return +(winnerRating + 2).toFixed(1);
+    }
+    if (winnerRating > loserRating + 2 && winnerRating < loserRating + 20) {
+        return +(winnerRating + 1).toFixed(1);
+    }
+    if (winnerRating >= loserRating + 20) {
+        return +winnerRating.toFixed(1);
+    }
 
-    return parseFloat(newRating.toFixed(1));
+    return NaN;
 }
 
 //   newWinnerRatings = 30, 75, 35, 34, 33, NaN, NaN, NaN, NaN, NaN, NaN
