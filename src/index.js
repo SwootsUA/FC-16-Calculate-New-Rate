@@ -8,7 +8,7 @@
  */
 function calculateNewRate(winnerRating, loserRating) {
     if (typeof winnerRating !== 'number' || typeof loserRating !== 'number' || Number.isNaN(winnerRating + loserRating)) {
-        console.log('Invalid input, please valid provide numbers');
+        console.log('Invalid input, please provide valid numbers');
         return NaN;
     }
 
